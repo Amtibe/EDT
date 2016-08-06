@@ -1,44 +1,38 @@
-import React, { Component } from 'react';
-import {
+/**
+ * @flow
+ */
+'use strict';
+
+var React = require('react');
+var ReactNative = require('react-native');
+var {
   Text,
   View,
   SegmentedControlIOS,
-  TouchableHighlight
-} from 'react-native';
+  TouchableHighlight,
+  StyleSheet
+} = ReactNative;
 
-import styles from './Styles/SelectionFiliereStyle'
+var datas = require('../Resources/ids.json');
+var config = require('../Resources/ids.json');
 
-var poles = ['Etoile', 'Luminy'];
-var filieres = ['GBM','GBMA','IRM','MAT','PEIP'];
 var yearsInge = ['3A','4A','5A'];
 var yearsPEIP = ['1A','2A'];
-//var grpsPEIP = ['grp1','grp2'];
 
-var datas = [
-  {
-    label:"Etoile",
-    filieres:['GC','GII','ME','MT','PEIP']
-  },
-  {
-    label:"Luminy",
-    filieres:['GBM','GBMA','IRM','MAT']
-  },
-];
+console.log(datas);
 
-class SelectionFiliere extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
+var SelectionFiliere = React.createClass({
+
+  getInitialState: function() {
+    return {
       pole:null,
       filiere:null,
       year:null,
-      //grp:null, //for PEIP only
     };
-  }
+  },
 
-
-  _renderFilieres(){
+  _renderFilieres: function(){
     if(this.state.pole !== null)
     return (
       <View>
@@ -51,14 +45,14 @@ class SelectionFiliere extends Component {
       />
       </View>
     );
-  }
+  },
 
   //if PEIP render different view
-  _renderYear(){
+  _renderYear: function(){
     if(this.state.pole !== null && this.state.filiere !== null)
     {
       var years = [];
-      if(datas[this.state.pole].filieres[this.state.filiere] == "PEIP"){
+      if(datas[this.state.pole].ressources[this.state.filiere].label == "PEIP"){
         years = yearsPEIP;
       } else {
         years = yearsInge;
@@ -77,9 +71,9 @@ class SelectionFiliere extends Component {
         </View>
       )
     }
-  }
+  },
 
-  _renderButton(){
+  _renderButton: function(){
     if (this.state.pole !== null && this.state.filiere !== null && this.state.year !== null) {
       return(
         <View>
@@ -89,13 +83,13 @@ class SelectionFiliere extends Component {
         </View>
       )
     }
-  }
+  },
 
-  _onPressButton(){
-    
-  }
+  _onPressButton: function(){
 
-  render () {
+  },
+
+  render: function() {
     return (
       <View style={styles.container}>
       <Text>Pôles</Text>
@@ -110,7 +104,15 @@ class SelectionFiliere extends Component {
       {this._renderButton()}
       </View>
     )
-  }
-}
+  },
+});
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 65,
+    //backgroundColor: 'whit',
+  },
+});
 
 module.exports = SelectionFiliere;

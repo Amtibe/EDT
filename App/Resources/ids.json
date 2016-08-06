@@ -1,6 +1,7 @@
 [
   {
     "label": "Etoile",
+    "filieres": ["GC","GII","ME","MT","PEIP"],
     "ressources": [
       {
         "label": "GC",
@@ -155,6 +156,7 @@
   },
   {
     "label": "Luminy",
+    "filieres": ["GBM","GBMA","IRM","MAT"],
     "ressources": [
       {
         "label": "GBM",

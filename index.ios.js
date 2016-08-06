@@ -1,17 +1,28 @@
 
+/**
+ * index for EDT application
+ *
+ * @providesModule MoviesApp
+ * @flow
+ */
 'use strict';
 
-import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, NavigatorIOS, Navigator } from 'react-native';
+var React = require('react');
+var ReactNative = require('react-native');
+var {
+  AppRegistry,
+  NavigatorIOS,
+  StyleSheet,
+} = ReactNative;
 
 import SelectionFiliere from './App/Components/SelectionFiliere';
+//var SelectionFiliere = './App/Components/SelectionFiliere';
 
-class PropertyFinderApp extends Component {
+class EdtApp extends React.Component {
   render(){
     return (
       <NavigatorIOS
-        itemWrapperStyle={styles.navWrap}
-        style={styles.nav}
+        style={styles.container}
         initialRoute={{
           title: 'EDT',
           component: SelectionFiliere,
@@ -22,13 +33,12 @@ class PropertyFinderApp extends Component {
 }
 
 const styles = StyleSheet.create({
-  navWrap: {
-      flex: 1,
-      marginTop: 70
-    },
-    nav: {
-      flex: 1,
-    },
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
 });
 
-AppRegistry.registerComponent('PropertyFinder', () => PropertyFinderApp);
+AppRegistry.registerComponent('EdtApp', () => EdtApp);
+
+module.exports = EdtApp;
