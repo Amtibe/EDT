@@ -6,10 +6,13 @@ The Schedule app is a demonstration of basic concepts, such as fetching data, re
 ## Datas
 Datas come from `https://ade-consult.univ-amu.fr/jsp/custom/modules/plannings/anonymous_cal.jsp`
 
-##Url parameters
+Url parameters
 Key | Value
 --- | ---
 projectId | 1
+resources | xxx[yyy,...]
 calType | "ical"
 firstDate | "YYYY-MM-DD"
 lastDate | "YYYY-MM-DD"
+
+Example : `https://ade-consult.univ-amu.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?projectId=1&resources=4885,4884,4883&calType=ical&firstDate=2016-02-22&lastDate=2016-02-28`
