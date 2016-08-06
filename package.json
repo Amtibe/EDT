@@ -9,6 +9,6 @@
     "moment": "^2.14.1",
     "moment-timezone": "^0.5.5",
     "react": "15.2.1",
-    "react-native": "0.30.0"
+    "react-native": "^0.31.0"
   }
 }

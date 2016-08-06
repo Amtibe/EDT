@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, SegmentedControlIOS } from 'react-native';
+import {
+  Text,
+  View,
+  SegmentedControlIOS,
+  TouchableHighlight
+} from 'react-native';
 
 import styles from './Styles/SelectionFiliereStyle'
 
@@ -22,67 +27,87 @@ var datas = [
 
 class SelectionFiliere extends Component {
   constructor(props) {
-      super(props);
+    super(props);
 
-      this.state = {
-        pole:null,
-        filiere:null,
-        year:null,
-        //grp:null, //for PEIP only
-      };
-    }
+    this.state = {
+      pole:null,
+      filiere:null,
+      year:null,
+      //grp:null, //for PEIP only
+    };
+  }
 
 
   _renderFilieres(){
     if(this.state.pole !== null)
-      return (
-        <View>
-          <Text>Filieres</Text>
-          <SegmentedControlIOS
-            values={datas[this.state.pole].filieres}
-            onChange={(event) => {
-              this.setState({filiere: event.nativeEvent.selectedSegmentIndex});
-            }}
-          />
-        </View>
+    return (
+      <View>
+      <Text>Filieres</Text>
+      <SegmentedControlIOS
+      values={datas[this.state.pole].filieres}
+      onChange={(event) => {
+        this.setState({filiere: event.nativeEvent.selectedSegmentIndex});
+      }}
+      />
+      </View>
     );
   }
 
   //if PEIP render different view
   _renderYear(){
-    var years = [];
-    if(datas[this.state.pole].filieres[4] == "PEIP"){
-      years = yearsPEIP;
-    } else {
-      years = yearsInge;
-    }
+    if(this.state.pole !== null && this.state.filiere !== null)
+    {
+      var years = [];
+      if(datas[this.state.pole].filieres[this.state.filiere] == "PEIP"){
+        years = yearsPEIP;
+      } else {
+        years = yearsInge;
+      }
 
-    if(this.state.filiere !== null)
-     return(
-       <View>
-         <Text>Années</Text>
-         <SegmentedControlIOS
-           values={years}
-           onChange={(event) => {
-             this.setState({year: event.nativeEvent.selectedSegmentIndex});
-           }}
-         />
-       </View>
-     )
+      if(this.state.filiere !== null)
+      return(
+        <View>
+        <Text>Années</Text>
+        <SegmentedControlIOS
+        values={years}
+        onChange={(event) => {
+          this.setState({year: event.nativeEvent.selectedSegmentIndex});
+        }}
+        />
+        </View>
+      )
+    }
+  }
+
+  _renderButton(){
+    if (this.state.pole !== null && this.state.filiere !== null && this.state.year !== null) {
+      return(
+        <View>
+        <TouchableHighlight onPress={this._onPressButton}>
+          <Text>GO</Text>
+        </TouchableHighlight>
+        </View>
+      )
+    }
+  }
+
+  _onPressButton(){
+    
   }
 
   render () {
     return (
       <View style={styles.container}>
-        <Text>Pôles</Text>
-        <SegmentedControlIOS
-          values={datas.map(p => p.label)}
-          onChange={(event) => {
-            this.setState({pole: event.nativeEvent.selectedSegmentIndex});
-          }}
-        />
-        {this._renderFilieres()}
-        {this._renderYear()}
+      <Text>Pôles</Text>
+      <SegmentedControlIOS
+      values={datas.map(p => p.label)}
+      onChange={(event) => {
+        this.setState({pole: event.nativeEvent.selectedSegmentIndex});
+      }}
+      />
+      {this._renderFilieres()}
+      {this._renderYear()}
+      {this._renderButton()}
       </View>
     )
   }
