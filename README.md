@@ -18,3 +18,4 @@ firstDate | "YYYY-MM-DD"
 lastDate | "YYYY-MM-DD"
 
 Example : `https://ade-consult.univ-amu.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?projectId=1&resources=4885,4884,4883&calType=ical&firstDate=2016-02-22&lastDate=2016-02-28`
+ 
