@@ -8,6 +8,7 @@ The Schedule app is a demonstration of basic concepts, such as fetching data, re
 Datas come from `https://ade-consult.univ-amu.fr/jsp/custom/modules/plannings/anonymous_cal.jsp`
 
 Url parameters
+
 Key | Value
 --- | ---
 projectId | 1
