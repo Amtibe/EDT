@@ -1,19 +1,18 @@
-var moment = require('moment-timezone');
-
 'use strict';
 
-import React, { Component } from 'react';
-import { StyleSheet,Text, View, TouchableHighlight , ListView} from 'react-native';
+var moment = require('moment-timezone');
+var React = require('react');
+var ReactNative = require('react-native');
+var {
+  StyleSheet,Text, View, TouchableHighlight , ListView
+} = ReactNative;
 
-//get the current offset in Paris
 var utcOffset = moment().tz("Europe/Paris").format('Z');
 var formatIcal = 'YYYYMMDDTHHmmssZ';
 
-class SearchResults extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
+var Schedule = React.createClass({
+  getInitialState: function() {
+    return {
       loaded : false,
       dataSource : new ListView.DataSource({
           getSectionData          : (dataBlob, sectionID) => {
@@ -25,14 +24,14 @@ class SearchResults extends Component {
           rowHasChanged           : (row1, row2) => row1 !== row2,
           sectionHeaderHasChanged : (s1, s2) => s1 !== s2
       })
-    }
-  }
+    };
+  },
 
-  componentDidMount() {
-        this._renderListViewData(this.props.listings);
-  }
+  componentDidMount: function() {
+      this._renderListViewData(this.props.listings);
+  },
 
-  _renderListViewData(events){
+  _renderListViewData: function(events){
     var data = {},
         sectionIds = [],
         objRowIds = {},
@@ -64,21 +63,21 @@ class SearchResults extends Component {
          dataSource : this.state.dataSource.cloneWithRowsAndSections(data, sectionIds, rowIds),
          loaded     : true
      });
-  }
+  },
 
-  renderRow(rowData, sectionID, rowID) {
-/*
-  CREATED:"19700101T000000Z"
-  DESCRIPTION:"\nInfo_4\nQUAFAFOU Mohamed\n(Exported :28/07/2016 14:40)"
-  DTEND:"20160208T140000Z"
-  DTSTAMP:"20160728T124004Z"
-  DTSTART:"20160208T120000Z"
-  LAST-MODIFIED:"20160728T124004Z"
-  LOCATION:"A101"
-  SEQUENCE:"1621052804"
-  SUMMARY:"Ext Connaissances CM"
-  UID:"ADE60556e6976657273697465323031355f323031362d373231332d302d30"
-*/
+  renderRow :function(rowData, sectionID, rowID) {
+    /*
+      CREATED:"19700101T000000Z"
+      DESCRIPTION:"\nInfo_4\nQUAFAFOU Mohamed\n(Exported :28/07/2016 14:40)"
+      DTEND:"20160208T140000Z"
+      DTSTAMP:"20160728T124004Z"
+      DTSTART:"20160208T120000Z"
+      LAST-MODIFIED:"20160728T124004Z"
+      LOCATION:"A101"
+      SEQUENCE:"1621052804"
+      SUMMARY:"Ext Connaissances CM"
+      UID:"ADE60556e6976657273697465323031355f323031362d373231332d302d30"
+    */
 
     var location = rowData.LOCATION && rowData.LOCATION.toUpperCase();
     var description = rowData.DESCRIPTION.split('\\n');
@@ -99,25 +98,21 @@ class SearchResults extends Component {
           </Text>
            {' - '}{description}
         </Text>
-        {/* <Image style={styles.added} source={require('./img/added-cell.png')} /> */}
       </View>
     );
-  }
+  },
 
+  renderSectionHeader: function(sectionData, sectionID) {
+      return (
+          <View style={styles.header}>
+              <Text style={styles.label}>
+                {sectionData}
+              </Text>
+          </View>
+      );
+  },
 
-
-    renderSectionHeader(sectionData, sectionID) {
-
-        return (
-            <View style={styles.header}>
-                <Text style={styles.label}>
-                  {sectionData}
-                </Text>
-            </View>
-        );
-    }
-
-  render(){
+  render: function(){
     return(
       <ListView
           dataSource={this.state.dataSource}
@@ -125,8 +120,9 @@ class SearchResults extends Component {
           renderSectionHeader={this.renderSectionHeader}
         />
     );
-  }
-}
+  },
+
+});
 
 const styles = StyleSheet.create({
   cell: {
@@ -166,15 +162,14 @@ const styles = StyleSheet.create({
     top: 0,
   },
   header: {
-  //height: 32,
-  paddingVertical: 2,
-  backgroundColor:'#F4F6F7', // '#F4F6F7' '#EBEEF1'
-  justifyContent: 'center',
-  paddingLeft: 17,
+    paddingVertical: 2,
+    backgroundColor:'#F4F6F7', // '#F4F6F7' '#EBEEF1'
+    justifyContent: 'center',
+    paddingLeft: 17,
   },
   label: {
     color: '#7F91A7',
   },
 });
 
-module.exports = SearchResults;
+module.exports = Schedule;

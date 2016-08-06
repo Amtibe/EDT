@@ -12,20 +12,89 @@ var {
   TouchableHighlight,
   StyleSheet
 } = ReactNative;
+var Schedule = require('./Schedule');
 
 var datas = require('../Resources/ids.json');
-var config = require('../Resources/ids.json');
 
 var yearsInge = ['3A','4A','5A'];
 var yearsPEIP = ['1A','2A'];
 
-console.log(datas);
+//Move these functions in a future
+function convertICS(source) {
+  var currentKey = "",
+  currentObj,
+  currentValue = "",
+  line,
+  objectNames = [],
+  output = {},
+  parents,
+  parentObj = {},
+  i,
+  linesLength,
+  lines = source.split(/\r\n|\n|\r/),
+  splitAt;
 
+  currentObj = output;
+  parents = [];
 
+  for (i = 0, linesLength = lines.length; i < linesLength; i++) {
+    line = lines[i];
+    if (line.charAt(0) === " ") {
+      currentObj[currentKey] += line.substr(1);
+
+    } else {
+      splitAt = line.indexOf(":");
+
+      if (splitAt < 0) {
+        continue;
+      }
+
+      currentKey = line.substr(0, splitAt);
+      currentValue = line.substr(splitAt + 1);
+
+      switch (currentKey) {
+        case "BEGIN":
+        parents.push(parentObj);
+        parentObj = currentObj;
+        if (parentObj[currentValue] == null) {
+          parentObj[currentValue] = [];
+        }
+        currentObj = {};
+        parentObj[currentValue].push(currentObj);
+        break;
+        case "END":
+        currentObj = parentObj;
+        parentObj = parents.shift();
+        break;
+        default:
+        if(currentObj[currentKey]) {
+          if(!Array.isArray(currentObj[currentKey])) {
+            currentObj[currentKey] = [currentObj[currentKey]];
+          }
+          currentObj[currentKey].push(currentValue);
+        } else {
+          currentObj[currentKey] = currentValue;
+        }
+      }
+    }
+  }
+  return output;
+}
+
+function compare(a,b) {
+  if (a.DTSTART < b.DTSTART)
+  return -1;
+  if (a.DTSTART > b.DTSTART)
+  return 1;
+  return 0;
+}
+
+//  View to select a specific student group
 var SelectionFiliere = React.createClass({
 
   getInitialState: function() {
     return {
+      isLoading: false,
       pole:null,
       filiere:null,
       year:null,
@@ -49,10 +118,11 @@ var SelectionFiliere = React.createClass({
 
   //if PEIP render different view
   _renderYear: function(){
+
     if(this.state.pole !== null && this.state.filiere !== null)
     {
       var years = [];
-      if(datas[this.state.pole].ressources[this.state.filiere].label == "PEIP"){
+      if(datas[this.state.pole].resources[this.state.filiere].label == "PEIP"){
         years = yearsPEIP;
       } else {
         years = yearsInge;
@@ -86,7 +156,51 @@ var SelectionFiliere = React.createClass({
   },
 
   _onPressButton: function(){
+    var query = this._urlEdt();
+    this._executeQuery(query);
+  },
 
+  _urlEdt(){
+    // Example :
+    // https://ade-consult.univ-amu.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?projectId=1&resources=4885,4884,4883&calType=ical&firstDate=2016-02-22&lastDate=2016-02-28
+    var stringResources = datas[this.state.pole].resources[this.state.filiere].resources[this.state.year].resources.toString();
+
+    var data = {
+      projectId:1, //never changed
+      resources: stringResources, //student class
+      calType: 'ical', //never change
+      firstDate: '2016-02-08', // date range
+      lastDate: '2016-02-14' // date range
+    };
+    var querystring = Object.keys(data)
+    .map(key => key + '=' + encodeURIComponent(data[key]))
+    .join('&');
+
+    return 'https://ade-consult.univ-amu.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?' + querystring;
+  },
+
+  _executeQuery: function(query){
+    this.setState({ isLoading: true });
+    fetch(query)
+      .then(response => response.text())
+      .then(text => this._handleResponse(text))
+      .catch(error =>
+         this.setState({ isLoading: false })
+      );
+  },
+
+  _handleResponse: function(response) {
+    this.setState({ isLoading: false });
+    if (response) {
+      var jsonCal = convertICS(response);
+      var events = jsonCal.VCALENDAR[0].VEVENT; //Only one calendar per request
+      events.sort(compare); // Sort events by start date
+      this.props.navigator.push({
+        title: 'Schedule',
+        component: Schedule,
+        passProps: {listings: events}
+       });
+    }
   },
 
   render: function() {

@@ -2,13 +2,13 @@
   {
     "label": "Etoile",
     "filieres": ["GC","GII","ME","MT","PEIP"],
-    "ressources": [
+    "resources": [
       {
         "label": "GC",
-        "ressources": [
+        "resources": [
           {
             "label": "3A",
-            "ressources": [
+            "resources": [
               4885,
               4884,
               4883
@@ -16,7 +16,7 @@
           },
           {
             "label": "4A",
-            "ressources": [
+            "resources": [
               15401,
               15400,
               4588,
@@ -25,7 +25,7 @@
           },
           {
             "label": "5A",
-            "ressources": [
+            "resources": [
               3506,
               4589
             ]
@@ -34,17 +34,17 @@
       },
       {
         "label": "GII",
-        "ressources": [
+        "resources": [
           {
             "label": "Biotechnologie 34",
-            "ressources": [
+            "resources": [
               3978,
               4535
             ]
           },
           {
             "label": "Biotechnologie 44",
-            "ressources": [
+            "resources": [
               4570,
               4566,
               4562,
@@ -53,7 +53,7 @@
           },
           {
             "label": "Biotechnologie 5A",
-            "ressources": [
+            "resources": [
               4573,
               4571,
               4576,
@@ -64,17 +64,17 @@
       },
       {
         "label": "ME",
-        "ressources": [
+        "resources": [
           {
             "label": "Biotechnologie 34",
-            "ressources": [
+            "resources": [
               3978,
               4535
             ]
           },
           {
             "label": "Biotechnologie 44",
-            "ressources": [
+            "resources": [
               4570,
               4566,
               4562,
@@ -83,7 +83,7 @@
           },
           {
             "label": "Biotechnologie 5A",
-            "ressources": [
+            "resources": [
               4573,
               4571,
               4576,
@@ -94,17 +94,17 @@
       },
       {
         "label": "MT",
-        "ressources": [
+        "resources": [
           {
             "label": "Biotechnologie 34",
-            "ressources": [
+            "resources": [
               3978,
               4535
             ]
           },
           {
             "label": "Biotechnologie 44",
-            "ressources": [
+            "resources": [
               4570,
               4566,
               4562,
@@ -113,7 +113,7 @@
           },
           {
             "label": "Biotechnologie 5A",
-            "ressources": [
+            "resources": [
               4573,
               4571,
               4576,
@@ -124,17 +124,17 @@
       },
       {
         "label": "PEIP",
-        "ressources": [
+        "resources": [
           {
             "label": "Biotechnologie 34",
-            "ressources": [
+            "resources": [
               3978,
               4535
             ]
           },
           {
             "label": "Biotechnologie 44",
-            "ressources": [
+            "resources": [
               4570,
               4566,
               4562,
@@ -143,7 +143,7 @@
           },
           {
             "label": "Biotechnologie 5A",
-            "ressources": [
+            "resources": [
               4573,
               4571,
               4576,
@@ -157,13 +157,13 @@
   {
     "label": "Luminy",
     "filieres": ["GBM","GBMA","IRM","MAT"],
-    "ressources": [
+    "resources": [
       {
         "label": "GBM",
-        "ressources": [
+        "resources": [
           {
             "label": "3A",
-            "ressources": [
+            "resources": [
               4885,
               4884,
               4883
@@ -171,7 +171,7 @@
           },
           {
             "label": "4A",
-            "ressources": [
+            "resources": [
               15401,
               15400,
               4588,
@@ -180,7 +180,7 @@
           },
           {
             "label": "5A",
-            "ressources": [
+            "resources": [
               3506,
               4589
             ]
@@ -189,17 +189,17 @@
       },
       {
         "label": "GBMA",
-        "ressources": [
+        "resources": [
           {
             "label": "Biotechnologie 34",
-            "ressources": [
+            "resources": [
               3978,
               4535
             ]
           },
           {
             "label": "Biotechnologie 44",
-            "ressources": [
+            "resources": [
               4570,
               4566,
               4562,
@@ -208,7 +208,7 @@
           },
           {
             "label": "Biotechnologie 5A",
-            "ressources": [
+            "resources": [
               4573,
               4571,
               4576,
@@ -219,17 +219,17 @@
       },
       {
         "label": "IRM",
-        "ressources": [
+        "resources": [
           {
             "label": "Biotechnologie 34",
-            "ressources": [
+            "resources": [
               3978,
               4535
             ]
           },
           {
             "label": "Biotechnologie 44",
-            "ressources": [
+            "resources": [
               4570,
               4566,
               4562,
@@ -238,7 +238,7 @@
           },
           {
             "label": "Biotechnologie 5A",
-            "ressources": [
+            "resources": [
               4573,
               4571,
               4576,
@@ -249,17 +249,17 @@
       },
       {
         "label": "MAT",
-        "ressources": [
+        "resources": [
           {
             "label": "Biotechnologie 34",
-            "ressources": [
+            "resources": [
               3978,
               4535
             ]
           },
           {
             "label": "Biotechnologie 44",
-            "ressources": [
+            "resources": [
               4570,
               4566,
               4562,
@@ -268,7 +268,7 @@
           },
           {
             "label": "Biotechnologie 5A",
-            "ressources": [
+            "resources": [
               4573,
               4571,
               4576,
