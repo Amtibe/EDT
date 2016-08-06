@@ -1,6 +1,6 @@
 /**
- * @flow
- */
+* @flow
+*/
 'use strict';
 
 var React = require('react');
@@ -147,9 +147,12 @@ var SelectionFiliere = React.createClass({
     if (this.state.pole !== null && this.state.filiere !== null && this.state.year !== null) {
       return(
         <View>
-        <TouchableHighlight onPress={this._onPressButton}>
-          <Text>GO</Text>
-        </TouchableHighlight>
+          <TouchableHighlight
+          style={styles.button}
+          onPress={this._onPressButton}
+          underlayColor='#99d9f4'>
+          <Text style={styles.buttonText}>Go</Text>
+          </TouchableHighlight>
         </View>
       )
     }
@@ -182,11 +185,11 @@ var SelectionFiliere = React.createClass({
   _executeQuery: function(query){
     this.setState({ isLoading: true });
     fetch(query)
-      .then(response => response.text())
-      .then(text => this._handleResponse(text))
-      .catch(error =>
-         this.setState({ isLoading: false })
-      );
+    .then(response => response.text())
+    .then(text => this._handleResponse(text))
+    .catch(error =>
+      this.setState({ isLoading: false })
+    );
   },
 
   _handleResponse: function(response) {
@@ -199,7 +202,7 @@ var SelectionFiliere = React.createClass({
         title: 'Schedule',
         component: Schedule,
         passProps: {listings: events}
-       });
+      });
     }
   },
 
@@ -226,6 +229,23 @@ var styles = StyleSheet.create({
     flex: 1,
     marginTop: 65,
     //backgroundColor: 'whit',
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
   },
 });
 
