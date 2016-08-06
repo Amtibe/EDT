@@ -1,5 +1,6 @@
 # Polytech Marseille Schedule
 The Schedule app is a demonstration of basic concepts, such as fetching data, rendering a list of data, and navigating between different screens.
+
 ![screenshot_1](http://i.imgur.com/FJbMny6.png)
 ![screenshot_2](http://imgur.com/vrLh8mi.png)
 ----------
@@ -10,7 +11,7 @@ Url parameters
 Key | Value
 --- | ---
 projectId | 1
-resources | xxx[yyy,...]
+resources | xxx,yyy,zzz,...
 calType | "ical"
 firstDate | "YYYY-MM-DD"
 lastDate | "YYYY-MM-DD"
